@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block title %}
+  <title>Home page</title>
+{% endblock %}
+{% block content %}
+  <h1>Home page</h1>
+  <p>Welcome to the game collection manager!</p>
+  <ul>
+    <li>Num gamers: {{ num_gamers }}</li>
+    <li>Num collections: {{ num_collections }}</li>
+  </ul>
+{% endblock %}
