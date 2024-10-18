@@ -12,7 +12,7 @@ class Genre(models.Model):
 class Game(models.Model):
     title = models.CharField(max_length=255, unique=True)
     platform = models.CharField(max_length=100, null=True, blank=True)
-    release_year = models.DateField(null=True, blank=True)
+    release_date = models.DateField(null=True, blank=True)
     price = models.DecimalField(max_digits=7, decimal_places=2)
     genre = models.ForeignKey(
         Genre,
@@ -28,12 +28,17 @@ class Game(models.Model):
 
 
 class Gamer(AbstractUser):
+
+    class Meta:
+        verbose_name = "Gamer"
+        verbose_name_plural = "Gamers"
+
     def __str__(self) -> str:
         return self.username
 
 
 class Collection(models.Model):
-    name = models.CharField(max_length=100, unique=True)
+    name = models.CharField(max_length=100)
     gamer = models.ForeignKey(
         Gamer,
         on_delete=models.CASCADE,
