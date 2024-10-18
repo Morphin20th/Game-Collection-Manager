@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>All Collections</h1>
+
+  <ul>
+    {% if collections %}
+      {% for collection in collections %}
+        <li>
+          <strong>{{ collection.name }}</strong> <br>
+          Created on: {{ collection.created_at|date:"F j, Y" }}
+        </li>
+      {% endfor %}
+    {% else %}
+      <p>No collections available.</p>
+    {% endif %}
+  </ul>
+
+{% endblock %}
