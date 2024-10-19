@@ -11,7 +11,7 @@
     {% if collections %}
       {% for collection in collections %}
         <li>
-          <strong>{{ collection.name }}</strong> <br>
+          <strong><a href="{{ collection.get_absolute_url }}">{{ collection.name }}</a></strong> <br>
           Created on: {{ collection.created_at|date:"F j, Y" }}
         </li>
       {% endfor %}

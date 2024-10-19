@@ -42,6 +42,10 @@ class CollectionListView(LoginRequiredMixin, generic.ListView):
         context['title'] = "All collections"
         return context
 
+class CollectionDetailView(LoginRequiredMixin, generic.DetailView):
+    model = Collection
+    template_name = "collection/collections/collection_detail.html"
+
 
 class GamerListView(LoginRequiredMixin, generic.ListView):
     model = Gamer
@@ -59,3 +63,4 @@ class GenreListView(LoginRequiredMixin, generic.ListView):
     model = Genre
     template_name = "collection/genre/genre_list.html"
     paginate_by = 5
+

@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block title %}
+  <title>Collection: {{ collection.name }}</title>
+{% endblock %}
+
+{% block content %}
+  <h1>{{ collection.name }}</h1>
+  <div class="ml-3">
+    <ul>
+      {% for game in collection.game.all %}
+        <li><a href="#">{{ game }}</a> Genre: {{ game.genre }}</li>
+      {% endfor %}
+    </ul>
+  </div>
+{% endblock %}
