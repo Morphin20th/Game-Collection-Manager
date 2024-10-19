@@ -1,7 +1,11 @@
 {% extends "base.html" %}
 
+{% block title %}
+	<title>{{ title }}</title>
+{% endblock %}
+
 {% block content %}
-  <h1>All Collections</h1>
+  <h1>{{ title }}</h1>
 
   <ul>
     {% if collections %}

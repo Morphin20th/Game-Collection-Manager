@@ -18,11 +18,16 @@ def index(request: HttpRequest) -> HttpResponse:
 
 class GamerCollectionListView(LoginRequiredMixin, generic.ListView):
     model = Collection
-    template_name = "collection/collections/gamer_collection_list.html"
+    template_name = "collection/collections/collection_list.html"
     context_object_name = "collections"
 
     def get_queryset(self):
         return Collection.objects.filter(gamer=self.request.user)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["title"] = "My collections"
+        return context
 
 
 class CollectionListView(LoginRequiredMixin, generic.ListView):
@@ -30,6 +35,10 @@ class CollectionListView(LoginRequiredMixin, generic.ListView):
     template_name = "collection/collections/collection_list.html"
     context_object_name = "collections"
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = "All collections"
+        return context
 
 class GamerListView(LoginRequiredMixin, generic.ListView):
     model = Gamer
@@ -39,6 +48,7 @@ class GamerListView(LoginRequiredMixin, generic.ListView):
 class GameListView(LoginRequiredMixin, generic.ListView):
     model = Game
     template_name = "collection/game/game_list.html"
+
 
 class GenreListView(LoginRequiredMixin, generic.ListView):
     model = Genre
