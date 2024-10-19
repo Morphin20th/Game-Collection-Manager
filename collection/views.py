@@ -4,7 +4,8 @@ from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render
 from django.views import generic
 
-from collection.models import Gamer, Collection
+from collection.models import Gamer, Collection, Game
+
 
 @login_required
 def index(request: HttpRequest) -> HttpResponse:
@@ -28,3 +29,8 @@ class CollectionListView(LoginRequiredMixin, generic.ListView):
     model = Collection
     template_name = "collection/collections/collection_list.html"
     context_object_name = "collections"
+
+
+class GamerListView(LoginRequiredMixin, generic.ListView):
+    model = Gamer
+    template_name = "collection/gamer/gamer_list.html"

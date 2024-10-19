@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block title %}
+	<title>All gamers</title>
+{% endblock %}
+
+{% block content %}
+  <h1>Gamers list</h1>
+  {% if gamer_list %}
+    <table class="table">
+      <tr>
+        <th>ID</th>
+        <th>Full Name</th>
+        <th>Username</th>
+      </tr>
+      {% for gamer in gamer_list %}
+        <tr>
+          <td>
+            {{ gamer.id }}
+          </td>
+          <td>
+            {{ gamer.first_name }} {{ gamer.last_name }}
+          </td>
+          <td>
+            {{ gamer.username }}
+          </td>
+        </tr>
+      {% endfor %}
+    </table>
+  {% endif %}
+{% endblock %}
