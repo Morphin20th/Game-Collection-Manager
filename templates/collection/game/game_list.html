@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block title %}
+  <title>All books</title>
+{% endblock %}
+{% block content %}
+  <h1>All games</h1>
+  {% if game_list %}
+    <table class="table">
+      <tr>
+        <th>ID</th>
+        <th>Title</th>
+        <th>Price</th>
+        <th>Genre</th>
+        <th>Release Date</th>
+        <th>Platform</th>
+      </tr>
+      {% for game in game_list %}
+        <tr>
+          <td>
+            {{ game.id }}
+          </td>
+          <td>
+            {{ game.title }}
+          </td>
+          <td>
+            {{ game.price }}
+          </td>
+          <td>
+            {{ game.genre }}
+          </td>
+          <td>
+            {{ game.release_date }}
+          </td>
+          <td>
+            {{ game.platform }}
+          </td>
+        </tr>
+      {% endfor %}
+    </table>
+  {% endif %}
+{% endblock %}

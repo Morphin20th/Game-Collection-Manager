@@ -34,3 +34,8 @@ class CollectionListView(LoginRequiredMixin, generic.ListView):
 class GamerListView(LoginRequiredMixin, generic.ListView):
     model = Gamer
     template_name = "collection/gamer/gamer_list.html"
+
+
+class GameListView(LoginRequiredMixin, generic.ListView):
+    model = Game
+    template_name = "collection/game/game_list.html"
