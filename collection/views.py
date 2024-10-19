@@ -4,7 +4,7 @@ from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render
 from django.views import generic
 
-from collection.models import Gamer, Collection, Game
+from collection.models import Gamer, Collection, Game, Genre
 
 
 @login_required
@@ -39,3 +39,7 @@ class GamerListView(LoginRequiredMixin, generic.ListView):
 class GameListView(LoginRequiredMixin, generic.ListView):
     model = Game
     template_name = "collection/game/game_list.html"
+
+class GenreListView(LoginRequiredMixin, generic.ListView):
+    model = Genre
+    template_name = "collection/genre/genre_list.html"

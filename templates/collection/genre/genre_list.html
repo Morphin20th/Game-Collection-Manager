@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block title %}
+  <title>All genres</title>
+{% endblock %}
+{% block content %}
+  <h1>All genres</h1>
+
+  {% if genre_list %}
+
+    <ul>
+      {% for genre in genre_list %}
+        <li>
+          {{ genre.name }}
+        </li>
+      {% endfor %}
+
+    </ul>
+
+  {% else %}
+    <p>There are no literary formats in Library</p>
+
+  {% endif %}
+
+{% endblock %}
