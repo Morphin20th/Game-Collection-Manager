@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block title %}
+  <title>Game: {{ game.title }}</title>
+{% endblock %}
+
+{% block content %}
+  <h1>{{ game.title }}</h1>
+  <div class="ml-3">
+    Genre: {{ game.genre }}
+    <br>
+    Price: {{ game.price }}
+    <br>
+    {% if game.platform %}
+      Platform: {{ game.platform }}
+      <br>
+    {% endif %}
+
+    Was released: {{ game.release_date }}
+
+  </div>
+{% endblock %}

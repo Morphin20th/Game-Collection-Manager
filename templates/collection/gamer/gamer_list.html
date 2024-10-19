@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block title %}
-	<title>All gamers</title>
+  <title>All gamers</title>
 {% endblock %}
 
 {% block content %}
@@ -22,7 +22,7 @@
             {{ gamer.first_name }} {{ gamer.last_name }}
           </td>
           <td>
-            {{ gamer.username }}
+            <a href="{% url 'collection:gamer-detail' pk=gamer.id %}">{{ gamer.username }}</a>
           </td>
         </tr>
       {% endfor %}

@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block title %}
+  <title>{{ gamer.username }} Profile</title>
+{% endblock %}
+
+{% block content %}
+  <h1>{{ gamer.username }} Profile</h1>
+  <div class="ml-3">
+    {% if gamer.first_name and gamer.last_name %}
+      First name: {{ gamer.first_name }}<br>
+      Last name: {{ gamer.last_name }}
+    {% endif %}
+    <ul>
+      <h3>{{ gamer.username }}'s collections:</h3>
+      {% for collection in gamer.collections.all %}
+        <li><a href="{{ collection.get_absolute_url }}">{{ collection }}</a></li>
+      {% endfor %}
+    </ul>
+  </div>
+{% endblock %}

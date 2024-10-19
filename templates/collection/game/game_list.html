@@ -20,7 +20,7 @@
             {{ game.id }}
           </td>
           <td>
-            {{ game.title }}
+            <a href="{% url 'collection:game-detail' pk=game.id %}">{{ game.title }}</a>
           </td>
           <td>
             {{ game.price }}

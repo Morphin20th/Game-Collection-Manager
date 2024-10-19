@@ -9,7 +9,7 @@
   <div class="ml-3">
     <ul>
       {% for game in collection.game.all %}
-        <li><a href="#">{{ game }}</a> Genre: {{ game.genre }}</li>
+        <li><a href="{% url 'collection:game-detail' pk=game.id %}">{{ game }}</a> Genre: {{ game.genre }}</li>
       {% endfor %}
     </ul>
   </div>

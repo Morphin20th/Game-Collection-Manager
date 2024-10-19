@@ -4,9 +4,13 @@ from collection.views import (
     index,
     GamerCollectionListView,
     CollectionListView,
+    CollectionDetailView,
     GamerListView,
+    GamerDetailView,
     GameListView,
-    GenreListView, CollectionDetailView,
+    GameDetailView,
+    GenreListView,
+
 )
 
 urlpatterns = [
@@ -15,7 +19,9 @@ urlpatterns = [
     path("collections/", CollectionListView.as_view(), name="collection-list"),
     path("collections/<int:pk>", CollectionDetailView.as_view(), name="collection-detail"),
     path("gamers/", GamerListView.as_view(), name="gamer-list"),
+    path("gamers/<int:pk>", GamerDetailView.as_view(), name="gamer-detail"),
     path("games/", GameListView.as_view(), name="game-list"),
+    path("games/<int:pk>", GameDetailView.as_view(), name="game-detail"),
     path("genres/", GenreListView.as_view(), name="genre-list"),
 ]
 

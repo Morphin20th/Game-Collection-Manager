@@ -1,7 +1,7 @@
 <ul class="sidebar-nav list-group">
 
   {% if user.is_authenticated %}
-    <li class="list-group-item">Logged in as {{ user.username }}</li>
+    <li class="list-group-item">Logged in as <a href="{% url 'collection:gamer-detail' pk=user.id %}">{{ user.username }}</a></li>
     <li class="list-group-item">
       <form action="{% url 'logout' %}" method="post">
         {% csrf_token %}
