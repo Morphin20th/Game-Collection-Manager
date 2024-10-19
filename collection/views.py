@@ -20,6 +20,7 @@ class GamerCollectionListView(LoginRequiredMixin, generic.ListView):
     model = Collection
     template_name = "collection/collections/collection_list.html"
     context_object_name = "collections"
+    paginate_by = 5
 
     def get_queryset(self):
         return Collection.objects.filter(gamer=self.request.user)
@@ -34,22 +35,27 @@ class CollectionListView(LoginRequiredMixin, generic.ListView):
     model = Collection
     template_name = "collection/collections/collection_list.html"
     context_object_name = "collections"
+    paginate_by = 5
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title'] = "All collections"
         return context
 
+
 class GamerListView(LoginRequiredMixin, generic.ListView):
     model = Gamer
     template_name = "collection/gamer/gamer_list.html"
+    paginate_by = 5
 
 
 class GameListView(LoginRequiredMixin, generic.ListView):
     model = Game
     template_name = "collection/game/game_list.html"
+    paginate_by = 5
 
 
 class GenreListView(LoginRequiredMixin, generic.ListView):
     model = Genre
     template_name = "collection/genre/genre_list.html"
+    paginate_by = 5

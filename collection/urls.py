@@ -1,7 +1,13 @@
 from django.urls import path
 
-from collection.views import index, GamerCollectionListView, CollectionListView, GamerListView, GameListView, \
-    GenreListView
+from collection.views import (
+    index,
+    GamerCollectionListView,
+    CollectionListView,
+    GamerListView,
+    GameListView,
+    GenreListView,
+)
 
 urlpatterns = [
     path("", index, name="index"),
