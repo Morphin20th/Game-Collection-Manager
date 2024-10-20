@@ -2,6 +2,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render, get_object_or_404
+from django.urls import reverse_lazy
 from django.views import generic
 
 from collection.models import Gamer, Collection, Game, Genre
@@ -99,3 +100,17 @@ class GameByGenreListView(LoginRequiredMixin, generic.ListView):
         context["game_list"] = context["object_list"]
         context["genre"] = genre
         return context
+
+
+class GenreCreateView(LoginRequiredMixin, generic.CreateView):
+    model = Genre
+    fields = "__all__"
+    success_url = reverse_lazy("collection:genre-list")
+    template_name = "collection/genre/genre_form.html"
+
+
+class GenreUpdateView(LoginRequiredMixin, generic.UpdateView):
+    model = Genre
+    fields = "__all__"
+    success_url = reverse_lazy("collection:genre-list")
+    template_name = "collection/genre/genre_form.html"

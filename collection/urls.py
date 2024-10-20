@@ -11,6 +11,8 @@ from collection.views import (
     GameDetailView,
     GenreListView,
     GameByGenreListView,
+    GenreCreateView,
+    GenreUpdateView,
 )
 
 urlpatterns = [
@@ -24,6 +26,8 @@ urlpatterns = [
     path("games/<int:pk>", GameDetailView.as_view(), name="game-detail"),
     path("genres/", GenreListView.as_view(), name="genre-list"),
     path("genres/<int:pk>/games/", GameByGenreListView.as_view(), name="genre-games"),
+    path("genres/create/", GenreCreateView.as_view(), name="genre-create"),
+    path("genres/<int:pk>/update/", GenreUpdateView.as_view(), name="genre-update"),
 ]
 
 app_name = "collection"
