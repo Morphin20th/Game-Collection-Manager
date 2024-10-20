@@ -1,9 +1,9 @@
 {% extends "base.html" %}
 {% block title %}
-  <title>All games</title>
+  <title>{{ title }}</title>
 {% endblock %}
 {% block content %}
-  <h1>All games</h1>
+  <h1>{{ title }}</h1>
   {% if game_list %}
     <table class="table">
       <tr>

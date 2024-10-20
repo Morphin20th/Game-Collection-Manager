@@ -10,7 +10,7 @@ from collection.views import (
     GameListView,
     GameDetailView,
     GenreListView,
-
+    GameByGenreListView,
 )
 
 urlpatterns = [
@@ -23,6 +23,7 @@ urlpatterns = [
     path("games/", GameListView.as_view(), name="game-list"),
     path("games/<int:pk>", GameDetailView.as_view(), name="game-detail"),
     path("genres/", GenreListView.as_view(), name="genre-list"),
+    path("genres/<int:pk>/games/", GameByGenreListView.as_view(), name="genre-games"),
 ]
 
 app_name = "collection"

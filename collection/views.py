@@ -1,7 +1,7 @@
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpRequest, HttpResponse
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.views import generic
 
 from collection.models import Gamer, Collection, Game, Genre
@@ -39,7 +39,7 @@ class CollectionListView(LoginRequiredMixin, generic.ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['title'] = "All collections"
+        context["title"] = "All collections"
         return context
 
 
@@ -64,6 +64,12 @@ class GameListView(LoginRequiredMixin, generic.ListView):
     template_name = "collection/game/game_list.html"
     paginate_by = 5
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["title"] = "All games"
+        return context
+
+
 class GameDetailView(LoginRequiredMixin, generic.DetailView):
     model = Game
     template_name = "collection/game/game_detail.html"
@@ -73,3 +79,23 @@ class GenreListView(LoginRequiredMixin, generic.ListView):
     model = Genre
     template_name = "collection/genre/genre_list.html"
     paginate_by = 5
+
+
+class GameByGenreListView(LoginRequiredMixin, generic.ListView):
+    model = Game
+    template_name = "collection/game/game_list.html"
+    paginate_by = 5
+
+    def get_queryset(self):
+        genre_pk = self.kwargs.get("pk")
+        genre = get_object_or_404(Genre, pk=genre_pk)
+        games = Game.objects.filter(genre=genre)
+        return games
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        genre = get_object_or_404(Genre, id=self.kwargs.get("pk"))
+        context["title"] = f"Games with genre {genre.name}"
+        context["game_list"] = context["object_list"]
+        context["genre"] = genre
+        return context

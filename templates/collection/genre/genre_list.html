@@ -10,7 +10,7 @@
     <ul>
       {% for genre in genre_list %}
         <li>
-          {{ genre.name }}
+          <a href="{% url 'collection:genre-games' pk=genre.id %}">{{ genre.name }}</a>
         </li>
       {% endfor %}
 
