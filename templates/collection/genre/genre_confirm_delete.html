@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block title %}
+  <title>Delete {{ genre }}?</title>
+{% endblock %}
+{% block content %}
+  <h1>Delete Collection</h1>
+
+  <p>Are you sure you <wa></wa>nt to delete genre {{ genre }}</p>
+  <form action="" method="POST">{% csrf_token %}
+    <input type="submit" value="Yes, delete" class="btn btn-danger">
+  </form>
+
+{% endblock %}

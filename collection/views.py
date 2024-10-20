@@ -68,6 +68,12 @@ class CollectionUpdateView(LoginRequiredMixin, generic.UpdateView):
     template_name = "collection/collections/collection_form.html"
 
 
+class CollectionDeleteView(LoginRequiredMixin, generic.DeleteView):
+    model = Collection
+    success_url = reverse_lazy("collection:collection-list")
+    template_name = "collection/collections/collection_confirm_delete.html"
+
+
 class GamerListView(LoginRequiredMixin, generic.ListView):
     model = Gamer
     template_name = "collection/gamer/gamer_list.html"
@@ -133,3 +139,8 @@ class GenreUpdateView(LoginRequiredMixin, generic.UpdateView):
     fields = "__all__"
     success_url = reverse_lazy("collection:genre-list")
     template_name = "collection/genre/genre_form.html"
+
+class GenreDeleteView(LoginRequiredMixin, generic.DeleteView):
+    model = Genre
+    success_url = reverse_lazy("collection:genre-list")
+    template_name = "collection/genre/genre_confirm_delete.html"
