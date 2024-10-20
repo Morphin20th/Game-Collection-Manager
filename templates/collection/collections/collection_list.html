@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block title %}
-	<title>{{ title }}</title>
+  <title>{{ title }}</title>
 {% endblock %}
 
 {% block content %}
@@ -13,11 +13,15 @@
         <li>
           <strong><a href="{{ collection.get_absolute_url }}">{{ collection.name }}</a></strong> <br>
           Created on: {{ collection.created_at|date:"F j, Y" }}
+          Creator: {{ collection.gamer.username }}
+          {% if collection.gamer == request.user %}
+          	<a href="{% url 'collection:collection-update' pk=collection.id %}">Edit</a>
+          {% endif %} 
         </li>
       {% endfor %}
     {% else %}
       <p>No collections available.</p>
     {% endif %}
   </ul>
-
+  <a href="{% url 'collection:collection-create' %}">Add new collection</a>
 {% endblock %}

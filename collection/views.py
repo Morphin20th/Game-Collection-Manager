@@ -5,6 +5,7 @@ from django.shortcuts import render, get_object_or_404
 from django.urls import reverse_lazy
 from django.views import generic
 
+from collection.forms import CollectionForm
 from collection.models import Gamer, Collection, Game, Genre
 
 
@@ -47,6 +48,24 @@ class CollectionListView(LoginRequiredMixin, generic.ListView):
 class CollectionDetailView(LoginRequiredMixin, generic.DetailView):
     model = Collection
     template_name = "collection/collections/collection_detail.html"
+
+
+class CollectionCreateView(LoginRequiredMixin, generic.CreateView):
+    model = Collection
+    success_url = reverse_lazy("collection:collection-list")
+    template_name = "collection/collections/collection_form.html"
+    form_class = CollectionForm
+
+    def form_valid(self, form):
+        form.instance.gamer = self.request.user
+        return super().form_valid(form)
+
+
+class CollectionUpdateView(LoginRequiredMixin, generic.UpdateView):
+    model = Collection
+    form_class = CollectionForm
+    success_url = reverse_lazy("collection:collection-list")
+    template_name = "collection/collections/collection_form.html"
 
 
 class GamerListView(LoginRequiredMixin, generic.ListView):
