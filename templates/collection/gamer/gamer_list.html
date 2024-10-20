@@ -7,11 +7,12 @@
 {% block content %}
   <h1>Gamers list</h1>
   {% if gamer_list %}
+    <a href="{% url 'collection:gamer-create' %}">Add new user</a>
     <table class="table">
       <tr>
         <th>ID</th>
-        <th>Full Name</th>
         <th>Username</th>
+        <th>Full Name</th>
       </tr>
       {% for gamer in gamer_list %}
         <tr>
@@ -19,10 +20,12 @@
             {{ gamer.id }}
           </td>
           <td>
-            {{ gamer.first_name }} {{ gamer.last_name }}
+            <a href="{% url 'collection:gamer-detail' pk=gamer.id %}">
+              {{ gamer.username }}{% if user == gamer %} (Me){% endif %}
+            </a>
           </td>
           <td>
-            <a href="{% url 'collection:gamer-detail' pk=gamer.id %}">{{ gamer.username }}</a>
+            {{ gamer.first_name }} {{ gamer.last_name }}
           </td>
         </tr>
       {% endfor %}

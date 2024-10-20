@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}
+  <title>Delete {{ game.title }}?</title>
+{% endblock %}
+{% block content %}
+  <h1>Delete account</h1>
+
+  <p>Are you sure you want to delete account {{ gamer.username }}</p>
+  <p>You will lose all your collections!</p>
+  <form action="" method="POST">{% csrf_token %}
+    <input type="submit" value="Yes, delete" class="btn btn-danger">
+  </form>
+
+{% endblock %}

@@ -5,7 +5,7 @@ from django.shortcuts import render, get_object_or_404
 from django.urls import reverse_lazy
 from django.views import generic
 
-from collection.forms import CollectionForm
+from collection.forms import CollectionForm, GamerCreationForm, GamerBioUpdateForm
 from collection.models import Gamer, Collection, Game, Genre
 
 
@@ -85,6 +85,26 @@ class GamerDetailView(LoginRequiredMixin, generic.DetailView):
     template_name = "collection/gamer/gamer_detail.html"
 
 
+class GamerCreateView(LoginRequiredMixin, generic.CreateView):
+    model = Gamer
+    success_url = reverse_lazy("collection:gamer-detail")
+    form_class = GamerCreationForm
+    template_name = "collection/gamer/gamer_form.html"
+
+
+class GamerBioUpdateView(LoginRequiredMixin, generic.UpdateView):
+    model = Gamer
+    success_url = reverse_lazy("collection:gamer-list")
+    form_class = GamerBioUpdateForm
+    template_name = "collection/gamer/gamer_form.html"
+
+
+class GamerDeleteView(LoginRequiredMixin, generic.DeleteView):
+    model = Gamer
+    success_url = reverse_lazy("collection:gamer-list")
+    template_name = "collection/gamer/gamer_confirm_delete.html"
+
+
 class GameListView(LoginRequiredMixin, generic.ListView):
     model = Game
     template_name = "collection/game/game_list.html"
@@ -119,6 +139,7 @@ class GameDeleteView(LoginRequiredMixin, generic.DeleteView):
     model = Game
     success_url = reverse_lazy("collection:game-list")
     template_name = "collection/game/game_confirm_delete.html"
+
 
 class GenreListView(LoginRequiredMixin, generic.ListView):
     model = Genre

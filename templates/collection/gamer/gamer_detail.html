@@ -7,6 +7,10 @@
 {% block content %}
   <h1>{{ gamer.username }} Profile</h1>
   <div class="ml-3">
+    {% if gamer.bio %}
+      Bio: {{ gamer.bio }}<br>
+    {% endif %}
+
     {% if gamer.first_name and gamer.last_name %}
       First name: {{ gamer.first_name }}<br>
       Last name: {{ gamer.last_name }}
@@ -17,5 +21,7 @@
         <li><a href="{{ collection.get_absolute_url }}">{{ collection }}</a></li>
       {% endfor %}
     </ul>
+    <a class="btn btn-secondary" href="{% url 'collection:gamer-update' pk=gamer.id %}">Edit Bio</a>
+    <a class="btn btn-danger" href="{% url 'collection:gamer-delete' pk=gamer.id %}">Delete user</a>
   </div>
 {% endblock %}
