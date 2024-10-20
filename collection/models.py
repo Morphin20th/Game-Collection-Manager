@@ -29,6 +29,8 @@ class Game(models.Model):
 
 
 class Gamer(AbstractUser):
+    bio = models.TextField(blank=True)
+
     class Meta:
         verbose_name = "Gamer"
         verbose_name_plural = "Gamers"
