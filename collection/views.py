@@ -101,6 +101,25 @@ class GameDetailView(LoginRequiredMixin, generic.DetailView):
     template_name = "collection/game/game_detail.html"
 
 
+class GameCreateView(LoginRequiredMixin, generic.CreateView):
+    model = Game
+    fields = "__all__"
+    success_url = reverse_lazy("collection:game-list")
+    template_name = "collection/game/game_form.html"
+
+
+class GameUpdateView(LoginRequiredMixin, generic.UpdateView):
+    model = Game
+    fields = "__all__"
+    success_url = reverse_lazy("collection:game-list")
+    template_name = "collection/game/game_form.html"
+
+
+class GameDeleteView(LoginRequiredMixin, generic.DeleteView):
+    model = Game
+    success_url = reverse_lazy("collection:game-list")
+    template_name = "collection/game/game_confirm_delete.html"
+
 class GenreListView(LoginRequiredMixin, generic.ListView):
     model = Genre
     template_name = "collection/genre/genre_list.html"
@@ -139,6 +158,7 @@ class GenreUpdateView(LoginRequiredMixin, generic.UpdateView):
     fields = "__all__"
     success_url = reverse_lazy("collection:genre-list")
     template_name = "collection/genre/genre_form.html"
+
 
 class GenreDeleteView(LoginRequiredMixin, generic.DeleteView):
     model = Genre

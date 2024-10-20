@@ -1,11 +1,11 @@
 {% extends "base.html" %}
 {% block title %}
-  <title>Delete {{ genre }}?</title>
+  <title>Delete {{ game.title }}?</title>
 {% endblock %}
 {% block content %}
-  <h1>Delete Genre</h1>
+  <h1>Delete Game</h1>
 
-  <p>Are you sure you want to delete genre {{ genre }}</p>
+  <p>Are you sure you want to delete game {{ game.title }}</p>
   <form action="" method="POST">{% csrf_token %}
     <input type="submit" value="Yes, delete" class="btn btn-danger">
   </form>
