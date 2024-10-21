@@ -22,13 +22,14 @@ from collection.views import (
     GameByGenreListView,
     GenreCreateView,
     GenreUpdateView,
-    GenreDeleteView,
+    GenreDeleteView, copy_collection,
 )
 
 urlpatterns = [
     path("", index, name="index"),
     path("my-collections/", GamerCollectionListView.as_view(), name="my-collection-list"),
     path("collections/", CollectionListView.as_view(), name="collection-list"),
+    path("collections/<int:pk>/copy-collection/", copy_collection, name="collection-copy"),
     path("collections/<int:pk>/", CollectionDetailView.as_view(), name="collection-detail"),
     path("collections/create/", CollectionCreateView.as_view(), name="collection-create"),
     path("collections/<int:pk>/update/", CollectionUpdateView.as_view(), name="collection-update"),
@@ -47,7 +48,7 @@ urlpatterns = [
     path("genres/<int:pk>/games/", GameByGenreListView.as_view(), name="genre-games"),
     path("genres/create/", GenreCreateView.as_view(), name="genre-create"),
     path("genres/<int:pk>/update/", GenreUpdateView.as_view(), name="genre-update"),
-    path("genres/<int:pk>/delete/", GenreDeleteView.as_view(), name="genre-delete")
+    path("genres/<int:pk>/delete/", GenreDeleteView.as_view(), name="genre-delete"),
 ]
 
 app_name = "collection"

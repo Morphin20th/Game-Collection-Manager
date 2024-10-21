@@ -15,8 +15,10 @@
           Created on: {{ collection.created_at|date:"F j, Y" }}
           Creator: {{ collection.gamer.username }}
           {% if collection.gamer == request.user %}
-          	<a class="btn btn-secondary" href="{% url 'collection:collection-update' pk=collection.id %}">Edit</a>
+            <a class="btn btn-secondary" href="{% url 'collection:collection-update' pk=collection.id %}">Edit</a>
             <a class="btn btn-danger" href="{% url 'collection:collection-delete' pk=collection.id %}">Delete</a>
+          {% else %}
+            <a class="btn btn-success" href="{% url 'collection:collection-copy' pk=collection.id %}">Copy</a>
           {% endif %}
         </li>
       {% endfor %}

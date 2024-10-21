@@ -1,6 +1,6 @@
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.http import HttpRequest, HttpResponse
+from django.http import HttpRequest, HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
 from django.urls import reverse_lazy
 from django.views import generic
@@ -45,7 +45,7 @@ class CollectionListView(LoginRequiredMixin, generic.ListView):
         return context
 
     def get_queryset(self):
-        return Collection.objects.select_related("gamer").filter(gamer=self.request.user)
+        return Collection.objects.select_related("gamer").all()
 
 
 class CollectionDetailView(LoginRequiredMixin, generic.DetailView):
@@ -199,3 +199,15 @@ class GenreDeleteView(LoginRequiredMixin, generic.DeleteView):
     model = Genre
     success_url = reverse_lazy("collection:genre-list")
     template_name = "collection/genre/genre_confirm_delete.html"
+
+
+@login_required
+def copy_collection(request, pk):
+    original_collection = get_object_or_404(Collection, pk=pk)
+    new_collection = Collection.objects.create(
+        name=f"Copy of {original_collection.name}",
+        gamer=request.user
+    )
+    new_collection.game.set(original_collection.game.all())
+    new_collection.save()
+    return HttpResponseRedirect(reverse_lazy("collection:collection-detail", args=[pk]))
