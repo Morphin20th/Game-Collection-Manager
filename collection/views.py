@@ -52,7 +52,6 @@ class CollectionDetailView(LoginRequiredMixin, generic.DetailView):
 
 class CollectionCreateView(LoginRequiredMixin, generic.CreateView):
     model = Collection
-    success_url = reverse_lazy("collection:collection-list")
     template_name = "collection/collections/collection_form.html"
     form_class = CollectionForm
 
@@ -60,17 +59,22 @@ class CollectionCreateView(LoginRequiredMixin, generic.CreateView):
         form.instance.gamer = self.request.user
         return super().form_valid(form)
 
+    def get_success_url(self):
+        return reverse_lazy("collection:collection-detail", kwargs={"pk": self.object.pk})
+
 
 class CollectionUpdateView(LoginRequiredMixin, generic.UpdateView):
     model = Collection
     form_class = CollectionForm
-    success_url = reverse_lazy("collection:collection-list")
     template_name = "collection/collections/collection_form.html"
+
+    def get_success_url(self):
+        return reverse_lazy("collection:collection-detail", kwargs={"pk": self.object.pk})
 
 
 class CollectionDeleteView(LoginRequiredMixin, generic.DeleteView):
     model = Collection
-    success_url = reverse_lazy("collection:collection-list")
+    success_url = reverse_lazy("collection:my-collection-list")
     template_name = "collection/collections/collection_confirm_delete.html"
 
 
@@ -87,9 +91,11 @@ class GamerDetailView(LoginRequiredMixin, generic.DetailView):
 
 class GamerCreateView(LoginRequiredMixin, generic.CreateView):
     model = Gamer
-    success_url = reverse_lazy("collection:gamer-detail")
     form_class = GamerCreationForm
     template_name = "collection/gamer/gamer_form.html"
+
+    def get_success_url(self):
+        return reverse_lazy("collection:gamer-detail", kwargs={"pk": self.object.pk})
 
 
 class GamerBioUpdateView(LoginRequiredMixin, generic.UpdateView):
@@ -124,15 +130,19 @@ class GameDetailView(LoginRequiredMixin, generic.DetailView):
 class GameCreateView(LoginRequiredMixin, generic.CreateView):
     model = Game
     fields = "__all__"
-    success_url = reverse_lazy("collection:game-list")
     template_name = "collection/game/game_form.html"
+
+    def get_success_url(self):
+        return reverse_lazy("collection:game-detail", kwargs={"pk": self.object.pk})
 
 
 class GameUpdateView(LoginRequiredMixin, generic.UpdateView):
     model = Game
     fields = "__all__"
-    success_url = reverse_lazy("collection:game-list")
     template_name = "collection/game/game_form.html"
+
+    def get_success_url(self):
+        return reverse_lazy("collection:game-detail", kwargs={"pk": self.object.pk})
 
 
 class GameDeleteView(LoginRequiredMixin, generic.DeleteView):
