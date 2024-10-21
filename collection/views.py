@@ -25,7 +25,7 @@ class GamerCollectionListView(LoginRequiredMixin, generic.ListView):
     paginate_by = 5
 
     def get_queryset(self):
-        return Collection.objects.filter(gamer=self.request.user)
+        return Collection.objects.select_related("gamer").filter(gamer=self.request.user)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -44,10 +44,14 @@ class CollectionListView(LoginRequiredMixin, generic.ListView):
         context["title"] = "All collections"
         return context
 
+    def get_queryset(self):
+        return Collection.objects.select_related("gamer").filter(gamer=self.request.user)
+
 
 class CollectionDetailView(LoginRequiredMixin, generic.DetailView):
     model = Collection
     template_name = "collection/collections/collection_detail.html"
+    queryset = Collection.objects.select_related("gamer").prefetch_related("game", "game__genre")
 
 
 class CollectionCreateView(LoginRequiredMixin, generic.CreateView):
@@ -87,6 +91,7 @@ class GamerListView(LoginRequiredMixin, generic.ListView):
 class GamerDetailView(LoginRequiredMixin, generic.DetailView):
     model = Gamer
     template_name = "collection/gamer/gamer_detail.html"
+    queryset = Gamer.objects.prefetch_related("collections")
 
 
 class GamerCreateView(LoginRequiredMixin, generic.CreateView):
@@ -115,6 +120,7 @@ class GameListView(LoginRequiredMixin, generic.ListView):
     model = Game
     template_name = "collection/game/game_list.html"
     paginate_by = 5
+    queryset = Game.objects.select_related("genre")
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -125,6 +131,7 @@ class GameListView(LoginRequiredMixin, generic.ListView):
 class GameDetailView(LoginRequiredMixin, generic.DetailView):
     model = Game
     template_name = "collection/game/game_detail.html"
+    queryset = Game.objects.select_related("genre")
 
 
 class GameCreateView(LoginRequiredMixin, generic.CreateView):
@@ -164,16 +171,13 @@ class GameByGenreListView(LoginRequiredMixin, generic.ListView):
 
     def get_queryset(self):
         genre_pk = self.kwargs.get("pk")
-        genre = get_object_or_404(Genre, pk=genre_pk)
-        games = Game.objects.filter(genre=genre)
-        return games
+        self.genre = get_object_or_404(Genre, pk=genre_pk)
+        return Game.objects.select_related("genre").filter(genre=self.genre)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        genre = get_object_or_404(Genre, id=self.kwargs.get("pk"))
-        context["title"] = f"Games with genre {genre.name}"
-        context["game_list"] = context["object_list"]
-        context["genre"] = genre
+        context["title"] = f"Games with genre {self.genre.name}"
+        context["genre"] = self.genre
         return context
 
 
