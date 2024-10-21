@@ -4,6 +4,10 @@
 {% endblock %}
 {% block content %}
   <h1>All genres</h1>
+  <form method="GET" action="" class="form-inline">
+    {{ search_form }}
+    <input class="btn btn-secondary" type="submit" value="🔍">
+  </form>
   <a href="{% url 'collection:genre-create' %}">Add new genre</a>
   {% if genre_list %}
 

@@ -8,6 +8,7 @@ from collection.views import (
     CollectionCreateView,
     CollectionUpdateView,
     CollectionDeleteView,
+    copy_collection,
     GamerListView,
     GamerDetailView,
     GamerCreateView,
@@ -22,7 +23,7 @@ from collection.views import (
     GameByGenreListView,
     GenreCreateView,
     GenreUpdateView,
-    GenreDeleteView, copy_collection,
+    GenreDeleteView,
 )
 
 urlpatterns = [

@@ -6,7 +6,12 @@
 
 {% block content %}
   <h1>Gamers list</h1>
+
   {% if gamer_list %}
+    <form method="GET" action="" class="form-inline">
+    {{ search_form }}
+    <input class="btn btn-secondary" type="submit" value="🔍">
+    </form>
     <a href="{% url 'collection:gamer-create' %}">Add new user</a>
     <table class="table">
       <tr>
