@@ -10,7 +10,10 @@ from collection.forms import (
     CollectionForm,
     GamerCreationForm,
     GamerBioUpdateForm,
-    CollectionSearchForm, GamerSearchForm, GameSearchForm, GenreSearchForm
+    CollectionSearchForm,
+    GamerSearchForm,
+    GameSearchForm,
+    GenreSearchForm,
 )
 
 
@@ -23,10 +26,20 @@ class GamerCollectionListView(LoginRequiredMixin, generic.ListView):
     paginate_by = 5
 
     def get_queryset(self):
-        return Collection.objects.select_related("gamer").filter(gamer=self.request.user)
+        queryset = Collection.objects.select_related("gamer").filter(gamer=self.request.user)
+        form = CollectionSearchForm(self.request.GET)
+        if form.is_valid():
+            name = form.cleaned_data["name"]
+            if name:
+                queryset = queryset.filter(name__icontains=name)
+        return queryset
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        name = self.request.GET.get("name")
+        context["search_form"] = CollectionSearchForm(
+            initial={"name": name}
+        )
         context["title"] = "My collections"
         return context
 
