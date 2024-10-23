@@ -280,6 +280,7 @@ class GenreDeleteView(LoginRequiredMixin, generic.DeleteView):
 @login_required
 def index(request: HttpRequest) -> HttpResponse:
     context = {
+        "num_games": Game.objects.count(),
         "num_gamers": Gamer.objects.count(),
         "num_collections": Collection.objects.count(),
     }

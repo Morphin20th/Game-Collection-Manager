@@ -1,12 +1,71 @@
 {% extends "base.html" %}
+
 {% block title %}
   <title>Home page</title>
 {% endblock %}
+
 {% block content %}
-  <h1>Home page</h1>
-  <p>Welcome to the game collection manager!</p>
-  <ul>
-    <li>Num gamers: {{ num_gamers }}</li>
-    <li>Num collections: {{ num_collections }}</li>
-  </ul>
+  <div class="pcoded-content">
+    <div class="pcoded-inner-content">
+      <div class="main-body">
+        <div class="page-wrapper">
+
+          <h1>Home page</h1>
+          <p>Welcome to the game collection manager!</p>
+
+          <div class="row">
+
+            <!-- Gamers num -->
+            <div class="col-md-6 col-xl-4">
+              <div class="card">
+                <div class="card-block">
+                  <h6 class="mb-4">Total Gamers</h6>
+                  <div class="row d-flex align-items-center">
+                    <div class="col-9">
+                      <h3 class="f-w-300 d-flex align-items-center m-b-0">
+                        <i class="feather icon-users text-c-green f-30 m-r-10"></i>{{ num_gamers }}
+                      </h3>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Collections num -->
+            <div class="col-md-6 col-xl-4">
+              <div class="card">
+                <div class="card-block">
+                  <h6 class="mb-4">Total Collections</h6>
+                  <div class="row d-flex align-items-center">
+                    <div class="col-9">
+                      <h3 class="f-w-300 d-flex align-items-center m-b-0">
+                        <i class="feather icon-layers text-c-blue f-30 m-r-10"></i>{{ num_collections }}
+                      </h3>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Games num -->
+            <div class="col-md-6 col-xl-4">
+              <div class="card">
+                <div class="card-block">
+                  <h6 class="mb-4">Total Games</h6>
+                  <div class="row d-flex align-items-center">
+                    <div class="col-9">
+                      <h3 class="f-w-300 d-flex align-items-center m-b-0">
+                        <i class="feather icon-play text-c-purple f-30 m-r-10"></i>{{ num_games }}
+                      </h3>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
 {% endblock %}

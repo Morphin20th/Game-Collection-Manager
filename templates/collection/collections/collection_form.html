@@ -1,11 +1,38 @@
 {% extends "base.html" %}
 {% block title %}
-	<title>{{ object|yesno:"Update, Create" }} Collection</title>
+  <title>{{ object|yesno:"Update, Create" }} Collection</title>
 {% endblock %}
+
 {% block content %}
-  <h1>{{ object|yesno:"Update, Create" }} Collection</h1>
-  <form action="" method="post" novalidate>{% csrf_token %}
-    {{ form.as_p }}
-    <input class="btn btn-primary" type="submit" value="Submit">
-  </form>
+  <div class="pcoded-content">
+    <div class="pcoded-inner-content">
+      <div class="main-body">
+        <div class="page-wrapper">
+          <div class="row">
+            <div class="col-sm-12">
+              <div class="card">
+                <div class="card-header">
+                  <h5>{{ object|yesno:"Update, Create" }} Collection</h5>
+                </div>
+                <div class="card-body">
+                  <form action="" method="post" novalidate>
+                    {% csrf_token %}
+                    <div class="form-group">
+                      {{ form.name.label_tag }}
+                      {{ form.name }}
+                    </div>
+                    <div class="form-group">
+                      <label for="game">Select Games</label>
+                      {{ form.game }}
+                    </div>
+                    <input class="btn btn-primary" type="submit" value="Submit">
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 {% endblock %}

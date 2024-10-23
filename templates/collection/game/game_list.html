@@ -1,55 +1,76 @@
 {% extends "base.html" %}
+{% load form_tags %}
 {% block title %}
   <title>{{ page_title }}</title>
 {% endblock %}
+
 {% block content %}
   <h1>{{ page_title }}</h1>
-  
-  <form method="GET" action="" class="form-inline">
-    {{ search_form }}
-  <input class="btn btn-secondary" type="submit" value="🔍">
-  </form>
-  <a href="{% url 'collection:game-create' %}">Add new game</a>
+
+  <!-- Search -->
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="card">
+        <div class="card-header">
+          <h5>Search Games</h5>
+        </div>
+        <div class="card-block">
+          <div class="row justify-content-center">
+            <div class="col-sm-6">
+              <form method="GET" action="">
+                {{ search_form.title|add_class:"form-control mb-4" }}
+                <button class="btn btn-primary btn-block" type="submit">🔍 Search</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <a href="{% url 'collection:game-create' %}" class="btn btn-primary mt-3 mb-3">Add new game</a>
+
+  <!-- Games -->
   {% if game_list %}
-    <table class="table">
-      <tr>
-        <th>ID</th>
-        <th>Title</th>
-        <th>Price</th>
-        <th>Genre</th>
-        <th>Release Date</th>
-        <th>Platform</th>
-        <th>Update</th>
-        <th>Delete</th>
-      </tr>
-      {% for game in game_list %}
-        <tr>
-          <td>
-            {{ game.id }}
-          </td>
-          <td>
-            <a href="{% url 'collection:game-detail' pk=game.id %}">{{ game.title }}</a>
-          </td>
-          <td>
-            {{ game.price }} $
-          </td>
-          <td>
-            {{ game.genre }}
-          </td>
-          <td>
-            {{ game.release_date }}
-          </td>
-          <td>
-            {{ game.platform }}
-          </td>
-          <td>
-            <a class="btn btn-secondary" href="{% url 'collection:game-update' pk=game.id %}">Update</a>
-          </td>
-          <td>
-            <a class="btn btn-danger" href="{% url 'collection:game-delete' pk=game.id %}">Delete</a>
-          </td>
-        </tr>
-      {% endfor %}
-    </table>
+    <div class="card Recent-Users">
+      <div class="card-header">
+        <h5>Recent Games</h5>
+      </div>
+      <div class="card-block px-0 py-3">
+        <div class="table-responsive">
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Title</th>
+                <th>Price</th>
+                <th>Genre</th>
+                <th>Release Date</th>
+                <th>Platform</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for game in game_list %}
+                <tr class="unread">
+                  <td>{{ game.id }}</td>
+                  <td>
+                    <a href="{% url 'collection:game-detail' pk=game.id %}">{{ game.title }}</a>
+                  </td>
+                  <td>{{ game.price }} $</td>
+                  <td>{{ game.genre }}</td>
+                  <td>{{ game.release_date }}</td>
+                  <td>{{ game.platform }}</td>
+                  <td>
+                    <a href="{% url 'collection:game-update' pk=game.id %}" class="label theme-bg text-white f-12">Update</a>
+                    <a href="{% url 'collection:game-delete' pk=game.id %}" class="label theme-bg2 text-white f-12">Delete</a>
+                  </td>
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
   {% endif %}
 {% endblock %}

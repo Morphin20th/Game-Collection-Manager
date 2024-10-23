@@ -1,30 +1,73 @@
 {% extends "base.html" %}
+{% load form_tags %}
 {% block title %}
   <title>All genres</title>
 {% endblock %}
+
 {% block content %}
   <h1>All genres</h1>
-  <form method="GET" action="" class="form-inline">
-    {{ search_form }}
-    <input class="btn btn-secondary" type="submit" value="🔍">
-  </form>
-  <a href="{% url 'collection:genre-create' %}">Add new genre</a>
+
+  <!-- Карточка для поиска -->
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="card">
+        <div class="card-header">
+          <h5>Search Genres</h5>
+        </div>
+        <div class="card-block">
+          <div class="row justify-content-center">
+            <div class="col-sm-6">
+              <form method="GET" action="">
+                {{ search_form.name|add_class:"form-control mb-4" }}
+                <button class="btn btn-primary btn-block" type="submit">🔍 Search</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <a href="{% url 'collection:genre-create' %}" class="btn btn-primary mt-3 mb-3">Add new genre</a>
+
+  <!-- Genre -->
   {% if genre_list %}
-
-    <ul>
-      {% for genre in genre_list %}
-        <li>
-          <a href="{% url 'collection:genre-games' pk=genre.id %}">{{ genre.name }}</a>&nbsp&nbsp&nbsp
-          <a class="btn btn-secondary" href="{% url 'collection:genre-update' pk=genre.id %}">Edit</a>
-          <a class="btn btn-danger" href="{% url 'collection:genre-delete' pk=genre.id %}">Delete</a>
-        </li>
-      {% endfor %}
-
-    </ul>
-
+    <div class="card Recent-Users">
+      <div class="card-header">
+        <h5>Genres List</h5>
+      </div>
+      <div class="card-block px-0 py-3">
+        <div class="table-responsive">
+          <table class="table table-hover">
+            <thead>
+            <tr>
+              <th>Name</th>
+              <th>Games</th>
+              <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for genre in genre_list %}
+              <tr class="unread">
+                <td>
+                  <a href="{% url 'collection:genre-games' pk=genre.id %}">{{ genre.name }}</a>
+                </td>
+                <td>
+                  {{ genre.games.count }}
+                </td>
+                <td>
+                  <a href="{% url 'collection:genre-update' pk=genre.id %}"
+                     class="label theme-bg text-white f-12">Edit</a>
+                  <a href="{% url 'collection:genre-delete' pk=genre.id %}" class="label theme-bg2 text-white f-12">Delete</a>
+                </td>
+              </tr>
+            {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
   {% else %}
     <p>There are no genres!</p>
-
   {% endif %}
-
 {% endblock %}

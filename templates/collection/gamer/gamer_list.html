@@ -1,39 +1,71 @@
 {% extends "base.html" %}
+{% load form_tags %}
 
 {% block title %}
   <title>All gamers</title>
 {% endblock %}
 
 {% block content %}
-  <h1>Gamers list</h1>
+  <h1>Gamers List</h1>
 
   {% if gamer_list %}
-    <form method="GET" action="" class="form-inline">
-    {{ search_form }}
-    <input class="btn btn-secondary" type="submit" value="🔍">
-    </form>
-    <a href="{% url 'collection:gamer-create' %}">Add new user</a>
-    <table class="table">
-      <tr>
-        <th>ID</th>
-        <th>Username</th>
-        <th>Full Name</th>
-      </tr>
-      {% for gamer in gamer_list %}
-        <tr>
-          <td>
-            {{ gamer.id }}
-          </td>
-          <td>
-            <a href="{% url 'collection:gamer-detail' pk=gamer.id %}">
-              {{ gamer.username }}{% if user == gamer %} (Me){% endif %}
-            </a>
-          </td>
-          <td>
-            {{ gamer.first_name }} {{ gamer.last_name }}
-          </td>
-        </tr>
-      {% endfor %}
-    </table>
+  
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="card">
+          <div class="card-header">
+            <h5>Search Gamers</h5>
+          </div>
+          <div class="card-block">
+            <div class="row justify-content-center">
+              <div class="col-sm-6">
+                <form method="GET" action="">
+                  {{ search_form.username|add_class:"form-control mb-4" }}
+                  <button class="btn btn-primary btn-block" type="submit">🔍 Search</button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card Recent-Users">
+      <div class="card-header">
+        <h5>Recent Users</h5>
+      </div>
+      <div class="card-block px-0 py-3">
+        <div class="table-responsive">
+          <table class="table table-hover">
+            <thead>
+            <tr>
+              <th>Username</th>
+              <th>Full Name</th>
+              <th>Collection count</th>
+              <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for gamer in gamer_list %}
+              <tr class="unread">
+                <td>
+                  <a class="label theme-bg text-white f-12" href="{% url 'collection:gamer-detail' pk=gamer.id %}">
+                    {{ gamer.username }}{% if user == gamer %} (Me){% endif %}
+                  </a>
+                </td>
+                <td>{{ gamer.first_name }} {{ gamer.last_name }}</td>
+                <td>{{ gamer.collections.count }}</td>
+                <td>
+                  <a href="{% url 'collection:gamer-delete' pk=gamer.id %}" class="label theme-bg2 text-white f-12">Delete</a>
+                </td>
+              </tr>
+            {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  {% else %}
+    <p>No gamers found.</p>
   {% endif %}
 {% endblock %}

@@ -1,13 +1,22 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 
-from collection.models import Collection, Gamer
+from collection.models import Collection, Gamer, Game
 
 
 class CollectionForm(forms.ModelForm):
     class Meta:
         model = Collection
-        fields = ["name", "game", ]
+        fields = "__all__"
+
+    game = forms.ModelMultipleChoiceField(
+        queryset=Game.objects.all(),
+        widget=forms.CheckboxSelectMultiple,
+    )
+
+    def __init__(self, *args, **kwargs):
+        super(CollectionForm, self).__init__(*args, **kwargs)
+        self.fields["name"].widget.attrs.update({"class": "form-control"})
 
 
 class GamerCreationForm(UserCreationForm):
@@ -39,6 +48,7 @@ class GenreSearchForm(forms.Form):
         widget=forms.TextInput(attrs={"placeholder": "Search by genre"}),
     )
 
+
 class CollectionSearchForm(forms.Form):
     name = forms.CharField(
         max_length=255,
@@ -46,6 +56,7 @@ class CollectionSearchForm(forms.Form):
         label="",
         widget=forms.TextInput(attrs={"placeholder": "Search by collection"}),
     )
+
 
 class GameSearchForm(forms.Form):
     title = forms.CharField(
