@@ -28,13 +28,13 @@
     </div>
   </div>
 
-  <a href="{% url 'collection:genre-create' %}" class="btn btn-primary mt-3 mb-3">Add new genre</a>
 
   <!-- Genre -->
   {% if genre_list %}
     <div class="card Recent-Users">
       <div class="card-header">
         <h5>Genres List</h5>
+         <a href="{% url 'collection:genre-create' %}" class="btn btn-success mt-3">Add new genre</a>
       </div>
       <div class="card-block px-0 py-3">
         <div class="table-responsive">

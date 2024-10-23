@@ -21,25 +21,29 @@
                     <!-- Title -->
                     <div class="form-group">
                       <label for="title">Game Title</label>
-                      <input type="text" id="title" name="title" class="form-control" value="{{ form.title.value|default_if_none:'' }}" required>
+                      <input type="text" id="title" name="title" class="form-control"
+                             value="{{ form.title.value|default_if_none:'' }}" required>
                     </div>
 
                     <!-- Platform -->
                     <div class="form-group">
                       <label for="platform">Platform</label>
-                      <input type="text" id="platform" name="platform" class="form-control" value="{{ form.platform.value|default_if_none:'' }}" required>
+                      <input type="text" id="platform" name="platform" class="form-control"
+                             value="{{ form.platform.value|default_if_none:'' }}" required>
                     </div>
 
                     <!-- Release Date -->
                     <div class="form-group">
                       <label for="release_date">Release Date</label>
-                      <input type="date" id="release_date" name="release_date" class="form-control" value="{{ form.release_date.value|default_if_none:'' }}" required>
+                      <input type="date" id="release_date" name="release_date" class="form-control"
+                             value="{{ form.release_date.value|default_if_none:'' }}" required>
                     </div>
 
                     <!-- Price -->
                     <div class="form-group">
                       <label for="price">Price</label>
-                      <input type="number" id="price" name="price" class="form-control" step="0.01" value="{{ form.price.value|default_if_none:'' }}" required>
+                      <input type="number" id="price" name="price" class="form-control" step="0.01"
+                             value="{{ form.price.value|default_if_none:'' }}" required>
                     </div>
 
                     <!-- Genre -->

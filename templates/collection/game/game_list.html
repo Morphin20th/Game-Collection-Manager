@@ -28,45 +28,46 @@
     </div>
   </div>
 
-  <a href="{% url 'collection:game-create' %}" class="btn btn-primary mt-3 mb-3">Add new game</a>
-
   <!-- Games -->
   {% if game_list %}
     <div class="card Recent-Users">
       <div class="card-header">
-        <h5>Recent Games</h5>
+        <h5>Games</h5>
+        <a href="{% url 'collection:game-create' %}" class="btn btn-success mt-3">Add new game</a>
       </div>
       <div class="card-block px-0 py-3">
         <div class="table-responsive">
           <table class="table table-hover">
             <thead>
-              <tr>
-                <th>ID</th>
-                <th>Title</th>
-                <th>Price</th>
-                <th>Genre</th>
-                <th>Release Date</th>
-                <th>Platform</th>
-                <th>Actions</th>
-              </tr>
+            <tr>
+              <th>ID</th>
+              <th>Title</th>
+              <th>Price</th>
+              <th>Genre</th>
+              <th>Release Date</th>
+              <th>Platform</th>
+              <th>Actions</th>
+            </tr>
             </thead>
             <tbody>
-              {% for game in game_list %}
-                <tr class="unread">
-                  <td>{{ game.id }}</td>
-                  <td>
-                    <a href="{% url 'collection:game-detail' pk=game.id %}">{{ game.title }}</a>
-                  </td>
-                  <td>{{ game.price }} $</td>
-                  <td>{{ game.genre }}</td>
-                  <td>{{ game.release_date }}</td>
-                  <td>{{ game.platform }}</td>
-                  <td>
-                    <a href="{% url 'collection:game-update' pk=game.id %}" class="label theme-bg text-white f-12">Update</a>
-                    <a href="{% url 'collection:game-delete' pk=game.id %}" class="label theme-bg2 text-white f-12">Delete</a>
-                  </td>
-                </tr>
-              {% endfor %}
+            {% for game in game_list %}
+              <tr class="unread">
+                <td>{{ game.id }}</td>
+                <td>
+                  <a href="{% url 'collection:game-detail' pk=game.id %}">{{ game.title }}</a>
+                </td>
+                <td>{{ game.price }} $</td>
+                <td>{{ game.genre }}</td>
+                <td>{{ game.release_date }}</td>
+                <td>{{ game.platform }}</td>
+                <td>
+                  <a href="{% url 'collection:game-update' pk=game.id %}"
+                     class="label theme-bg text-white f-12">Update</a>
+                  <a href="{% url 'collection:game-delete' pk=game.id %}"
+                     class="label theme-bg2 text-white f-12">Delete</a>
+                </td>
+              </tr>
+            {% endfor %}
             </tbody>
           </table>
         </div>

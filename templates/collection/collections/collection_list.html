@@ -8,7 +8,6 @@
 {% block content %}
   <h1>{{ title }}</h1>
 
-  <!-- Карточка для поиска -->
   <div class="row">
     <div class="col-sm-12">
       <div class="card">
@@ -29,41 +28,48 @@
     </div>
   </div>
 
-  <!-- Список коллекций -->
   {% if collections %}
     <div class="card Recent-Users mt-4">
       <div class="card-header">
         <h5>Collections List</h5>
+        <a href="{% url 'collection:collection-create' %}" class="btn btn-success mt-3">Add new collection</a>
       </div>
       <div class="card-block px-0 py-3">
         <div class="table-responsive">
           <table class="table table-hover">
             <thead>
-              <tr>
-                <th>Name</th>
-                <th>Created On</th>
-                <th>Creator</th>
-                <th>Actions</th>
-              </tr>
+            <tr>
+              <th>Name</th>
+              <th>Created On</th>
+              <th>Creator</th>
+              <th>Actions</th>
+            </tr>
             </thead>
             <tbody>
-              {% for collection in collections %}
-                <tr class="unread">
-                  <td>
-                    <strong><a href="{{ collection.get_absolute_url }}">{{ collection.name }}</a></strong>
-                  </td>
-                  <td>{{ collection.created_at|date:"F j, Y" }}</td>
-                  <td>{{ collection.gamer.username }}</td>
-                  <td>
-                    {% if collection.gamer == request.user %}
-                      <a href="{% url 'collection:collection-update' pk=collection.id %}" class="label theme-bg text-white f-12">Edit</a>
-                      <a href="{% url 'collection:collection-delete' pk=collection.id %}" class="label theme-bg2 text-white f-12">Delete</a>
-                    {% else %}
-                      <a href="{% url 'collection:collection-copy' pk=collection.id %}" class="label theme-bg text-white f-12">Copy</a>
-                    {% endif %}
-                  </td>
-                </tr>
-              {% endfor %}
+            {% for collection in collections %}
+              <tr class="unread">
+                <td>
+                  <strong><a href="{{ collection.get_absolute_url }}">{{ collection.name }}</a></strong>
+                </td>
+                <td>
+                  {{ collection.created_at|date:"F j, Y" }}
+                </td>
+                <td>
+                  {{ collection.gamer.username }}
+                </td>
+                <td>
+                  {% if collection.gamer == request.user %}
+                    <a href="{% url 'collection:collection-update' pk=collection.id %}"
+                       class="label theme-bg text-white f-12">Edit</a>
+                    <a href="{% url 'collection:collection-delete' pk=collection.id %}"
+                       class="label theme-bg2 text-white f-12">Delete</a>
+                  {% else %}
+                    <a href="{% url 'collection:collection-copy' pk=collection.id %}"
+                       class="label theme-bg text-white f-12">Copy</a>
+                  {% endif %}
+                </td>
+              </tr>
+            {% endfor %}
             </tbody>
           </table>
         </div>
@@ -73,6 +79,5 @@
     <p>No collections available.</p>
   {% endif %}
 
-  <!-- Добавить новую коллекцию -->
-  <a href="{% url 'collection:collection-create' %}" class="btn btn-success mt-3">Add new collection</a>
+
 {% endblock %}
