@@ -19,6 +19,19 @@ class CollectionForm(forms.ModelForm):
         self.fields["name"].widget.attrs.update({"class": "form-control"})
 
 
+class GameForm(forms.ModelForm):
+    class Meta:
+        model = Game
+        fields = ['title', 'platform', 'release_date', 'price', 'genre']
+        widgets = {
+            'title': forms.TextInput(attrs={'class': 'form-control'}),
+            'platform': forms.TextInput(attrs={'class': 'form-control'}),
+            'release_date': forms.DateInput(attrs={'class': 'form-control', 'type': 'date'}),
+            'price': forms.NumberInput(attrs={'class': 'form-control'}),
+            'genre': forms.Select(attrs={'class': 'form-control'}),
+        }
+
+
 class GamerCreationForm(UserCreationForm):
     class Meta:
         model = Gamer

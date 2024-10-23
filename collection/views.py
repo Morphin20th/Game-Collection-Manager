@@ -237,9 +237,11 @@ class CollectionDeleteView(LoginRequiredMixin, generic.DeleteView):
 
 class GamerBioUpdateView(LoginRequiredMixin, generic.UpdateView):
     model = Gamer
-    success_url = reverse_lazy("collection:gamer-list")
     form_class = GamerBioUpdateForm
     template_name = "collection/gamer/gamer_form.html"
+
+    def get_success_url(self):
+        return reverse_lazy("collection:gamer-detail", kwargs={"pk": self.object.pk})
 
 
 class GameUpdateView(LoginRequiredMixin, generic.UpdateView):
