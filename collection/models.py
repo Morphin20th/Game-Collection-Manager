@@ -25,7 +25,7 @@ class Game(models.Model):
         ordering = ["title"]
 
     def __str__(self) -> str:
-        return self.title
+        return f"{self.title} ({self.genre}) Price: {self.price}"
 
 
 class Gamer(AbstractUser):
@@ -36,7 +36,7 @@ class Gamer(AbstractUser):
         verbose_name_plural = "Gamers"
 
     def __str__(self) -> str:
-        return self.username
+        return f"{self.username} - {self.first_name} {self.last_name}"
 
 
 class Collection(models.Model):
@@ -53,7 +53,7 @@ class Collection(models.Model):
         ordering = ["name", ]
 
     def __str__(self) -> str:
-        return self.name
+        return f"{self.name} Creator: {self.gamer.username}"
 
     def get_absolute_url(self):
         return reverse("collection:collection-detail", args=[str(self.id)])

@@ -135,3 +135,5 @@ INTERNAL_IPS = [
 ]
 
 LOGIN_REDIRECT_URL = "/"
+
+TEST_DISCOVERY_PATTERN = 'tests/test_*.py'
