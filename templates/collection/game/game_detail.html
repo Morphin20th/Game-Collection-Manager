@@ -5,18 +5,26 @@
 {% endblock %}
 
 {% block content %}
-  <h1>{{ game.title }}</h1>
-  <div class="ml-3">
-    Genre: {{ game.genre }}
-    <br>
-    Price: {{ game.price }} $
-    <br>
-    {% if game.platform %}
-      Platform: {{ game.platform }}
-      <br>
-    {% endif %}
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="card">
+        <div class="card-header text-center">
+          <h2>{{ game.title }}</h2>
+        </div>
+        <div class="card-body">
+          <p><strong>Genre:</strong> {{ game.genre }}</p>
 
-    Was released: {{ game.release_date }}
+          <p><strong>Price:</strong> {{ game.price }} $</p>
 
+          {% if game.platform %}
+            <p><strong>Platform:</strong> {{ game.platform }}</p>
+          {% endif %}
+
+          <p><strong>Release Date:</strong> {{ game.release_date }}</p>
+        </div>
+      </div>
+    </div>
   </div>
+</div>
 {% endblock %}

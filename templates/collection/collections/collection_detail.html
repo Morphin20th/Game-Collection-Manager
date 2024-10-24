@@ -5,12 +5,25 @@
 {% endblock %}
 
 {% block content %}
+<div class="container mt-5">
   <h1>{{ collection.name }}</h1>
   <div class="ml-3">
-    <ul>
+    <div class="row">
       {% for game in collection.game.all %}
-        <li><a href="{% url 'collection:game-detail' pk=game.id %}">{{ game }}</a> Genre: {{ game.genre }}</li>
+        <div class="col-md-6 mb-3">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">
+                <a href="{% url 'collection:game-detail' pk=game.id %}">{{ game }}</a>
+              </h5>
+              <p class="card-text">Genre: {{ game.genre }}</p>
+            </div>
+          </div>
+        </div>
+      {% empty %}
+        <p>No games in this collection.</p>
       {% endfor %}
-    </ul>
+    </div>
   </div>
+</div>
 {% endblock %}

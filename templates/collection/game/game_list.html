@@ -51,7 +51,7 @@
             </thead>
             <tbody>
             {% for game in game_list %}
-              <tr class="unread">
+              <tr>
                 <td>{{ game.id }}</td>
                 <td>
                   <a href="{% url 'collection:game-detail' pk=game.id %}">{{ game.title }}</a>

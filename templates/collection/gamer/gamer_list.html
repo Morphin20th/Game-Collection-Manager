@@ -48,7 +48,7 @@
             </thead>
             <tbody>
             {% for gamer in gamer_list %}
-              <tr class="unread">
+              <tr>
                 <td>
                   <a class="label theme-bg text-white f-12" href="{% url 'collection:gamer-detail' pk=gamer.id %}">
                     {{ gamer.username }}{% if user == gamer %} (Me){% endif %}

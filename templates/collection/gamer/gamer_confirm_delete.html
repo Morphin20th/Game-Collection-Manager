@@ -1,14 +1,30 @@
 {% extends "base.html" %}
+
 {% block title %}
-  <title>Delete {{ game.title }}?</title>
+  <title>Delete {{ gamer.username }}'s Account?</title>
 {% endblock %}
+
 {% block content %}
-  <h1>Delete account</h1>
-
-  <p>Are you sure you want to delete account {{ gamer.username }}</p>
-  <p>You will lose all your collections!</p>
-  <form action="" method="POST">{% csrf_token %}
-    <input type="submit" value="Yes, delete" class="btn btn-danger">
-  </form>
-
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-header text-center">
+          <h5 class="card-title">Delete Account</h5>
+        </div>
+        <div class="card-body">
+          <p class="card-text">Are you sure you want to delete the account <strong>{{ gamer.username }}</strong>?</p>
+          <p class="card-text text-danger">You will lose all your collections!</p>
+          <form action="" method="POST">
+            {% csrf_token %}
+            <div class="d-flex justify-content-between">
+              <a href="{% url 'collection:gamer-detail' pk=gamer.pk %}" class="btn btn-secondary">Cancel</a>
+              <input type="submit" value="Yes, delete" class="btn btn-danger">
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 {% endblock %}
