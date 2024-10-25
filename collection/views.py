@@ -18,7 +18,6 @@ from collection.forms import (
 
 
 # ListView classes
-# can be deleted
 class GamerCollectionListView(LoginRequiredMixin, generic.ListView):
     model = Collection
     template_name = "collection/collections/collection_list.html"
