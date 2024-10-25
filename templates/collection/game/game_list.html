@@ -40,7 +40,6 @@
           <table class="table table-hover">
             <thead>
             <tr>
-              <th>ID</th>
               <th>Title</th>
               <th>Price</th>
               <th>Genre</th>
@@ -52,7 +51,6 @@
             <tbody>
             {% for game in game_list %}
               <tr>
-                <td>{{ game.id }}</td>
                 <td>
                   <a href="{% url 'collection:game-detail' pk=game.id %}">{{ game.title }}</a>
                 </td>

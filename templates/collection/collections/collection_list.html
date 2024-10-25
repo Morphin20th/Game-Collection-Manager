@@ -29,7 +29,7 @@
   </div>
 
   {% if collections %}
-    <div class="card Recent-Users mt-4">
+    <div class="card Recent-Users">
       <div class="card-header">
         <h5>Collections List</h5>
         <a href="{% url 'collection:collection-create' %}" class="btn btn-success mt-3">Add new collection</a>
@@ -78,6 +78,4 @@
   {% else %}
     <p>No collections available.</p>
   {% endif %}
-
-
 {% endblock %}

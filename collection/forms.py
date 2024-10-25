@@ -24,11 +24,11 @@ class GameForm(forms.ModelForm):
         model = Game
         fields = ["title", "platform", "release_date", "price", "genre"]
         widgets = {
-            "title": forms.TextInput(attrs={'class': 'form-control'}),
-            "platform": forms.TextInput(attrs={'class': 'form-control'}),
-            "release_date": forms.DateInput(attrs={'class': 'form-control', 'type': 'date'}),
-            "price": forms.NumberInput(attrs={'class': 'form-control'}),
-            "genre": forms.Select(attrs={'class': 'form-control'}),
+            "title": forms.TextInput(attrs={"class": "form-control"}),
+            "platform": forms.TextInput(attrs={"class": "form-control"}),
+            "release_date": forms.DateInput(attrs={"class": "form-control", "type": "date"}),
+            "price": forms.NumberInput(attrs={"class": "form-control"}),
+            "genre": forms.Select(attrs={"class": "form-control"}),
         }
 
 

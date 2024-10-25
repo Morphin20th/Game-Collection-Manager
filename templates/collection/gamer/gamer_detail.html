@@ -5,45 +5,48 @@
 {% endblock %}
 
 {% block content %}
-<div class="container mt-5">
-  <div class="row justify-content-center">
-    <div class="col-md-8">
-      <div class="card">
-        <div class="card-header text-center">
-          <h2>{{ gamer.username }}'s Profile</h2>
-        </div>
-        <div class="card-body">
-          <!-- Bio -->
-          {% if gamer.bio %}
-            <p><strong>Bio:</strong> {{ gamer.bio }}</p>
-          {% endif %}
-          
-          <!-- First and Last Name -->
-          {% if gamer.first_name and gamer.last_name %}
-            <p><strong>First Name:</strong> {{ gamer.first_name }}</p>
-            <p><strong>Last Name:</strong> {{ gamer.last_name }}</p>
-          {% endif %}
-          
-          <!-- Collections -->
-          <h3 class="mt-4">{{ gamer.username }}'s Collections:</h3>
-          <ul class="list-group mb-3">
-            {% for collection in gamer.collections.all %}
-              <li class="list-group-item">
-                <a href="{{ collection.get_absolute_url }}">{{ collection }}</a>
-              </li>
-            {% empty %}
-              <p>{{ gamer.username }} has no collections yet.</p>
-            {% endfor %}
-          </ul>
-          
-          <!-- Action Buttons -->
-          <div class="d-flex justify-content-between">
-            <a class="btn btn-secondary" href="{% url 'collection:gamer-update' pk=gamer.id %}">Edit Bio</a>
-            <a class="btn btn-danger" href="{% url 'collection:gamer-delete' pk=gamer.id %}">Delete User</a>
+  <div class="container mt-5">
+    <div class="row justify-content-center">
+      <div class="col-md-8">
+        <div class="card">
+          <div class="card-header text-center">
+            <h2>{{ gamer.username }}'s Profile</h2>
+          </div>
+          <div class="card-body">
+            <!-- Bio -->
+            {% if gamer.bio %}
+              <p><strong>Bio:</strong> {{ gamer.bio }}</p>
+            {% endif %}
+
+            <!-- First and Last Name -->
+            {% if gamer.first_name and gamer.last_name %}
+              <p><strong>First Name:</strong> {{ gamer.first_name }}</p>
+              <p><strong>Last Name:</strong> {{ gamer.last_name }}</p>
+            {% endif %}
+
+            <!-- Collections -->
+            <h3 class="mt-4">{{ gamer.username }}'s Collections:</h3>
+            <ul class="list-group mb-3">
+              {% for collection in gamer.collections.all %}
+                <li class="list-group-item">
+                  <a href="{{ collection.get_absolute_url }}">{{ collection }}</a>
+                </li>
+              {% empty %}
+                <p>{{ gamer.username }} has no collections yet.</p>
+              {% endfor %}
+            </ul>
+
+            <!-- Action Buttons -->
+            <div class="d-flex justify-content-between">
+              {% if gamer.pk == request.user.pk %}
+                <a class="btn btn-secondary" href="{% url 'collection:gamer-update' pk=gamer.id %}">Edit Bio</a>
+              {% endif %}
+
+              <a class="btn btn-danger" href="{% url 'collection:gamer-delete' pk=gamer.id %}">Delete User</a>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-</div>
 {% endblock %}
