@@ -228,12 +228,6 @@ class CollectionUpdateView(LoginRequiredMixin, generic.UpdateView):
         return reverse_lazy("collection:collection-detail", kwargs={"pk": self.object.pk})
 
 
-class CollectionDeleteView(LoginRequiredMixin, generic.DeleteView):
-    model = Collection
-    success_url = reverse_lazy("collection:my-collection-list")
-    template_name = "collection/collections/collection_confirm_delete.html"
-
-
 class GamerBioUpdateView(LoginRequiredMixin, generic.UpdateView):
     model = Gamer
     form_class = GamerBioUpdateForm
@@ -260,6 +254,12 @@ class GenreUpdateView(LoginRequiredMixin, generic.UpdateView):
 
 
 # DeleteView classes
+class CollectionDeleteView(LoginRequiredMixin, generic.DeleteView):
+    model = Collection
+    success_url = reverse_lazy("collection:my-collection-list")
+    template_name = "collection/collections/collection_confirm_delete.html"
+
+
 class GamerDeleteView(LoginRequiredMixin, generic.DeleteView):
     model = Gamer
     success_url = reverse_lazy("collection:gamer-list")

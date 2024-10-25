@@ -7,7 +7,7 @@ from collection.models import Collection, Gamer, Game
 class CollectionForm(forms.ModelForm):
     class Meta:
         model = Collection
-        fields = "__all__"
+        fields = ["name", "game", ]
 
     game = forms.ModelMultipleChoiceField(
         queryset=Game.objects.all(),
