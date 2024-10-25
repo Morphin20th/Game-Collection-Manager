@@ -76,7 +76,7 @@ class GamerListView(LoginRequiredMixin, generic.ListView):
     paginate_by = 5
 
     def get_queryset(self):
-        queryset = Gamer.objects.all()
+        queryset = Gamer.objects.prefetch_related("collections")
         form = GamerSearchForm(self.request.GET)
         if form.is_valid():
             username = form.cleaned_data.get("username")
@@ -144,7 +144,7 @@ class GenreListView(LoginRequiredMixin, generic.ListView):
     paginate_by = 5
 
     def get_queryset(self):
-        queryset = Genre.objects.all()
+        queryset = Genre.objects.prefetch_related("games")
         form = GenreSearchForm(self.request.GET)
         if form.is_valid():
             name = form.cleaned_data.get("name")
