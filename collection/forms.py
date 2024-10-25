@@ -26,16 +26,23 @@ class GameForm(forms.ModelForm):
         widgets = {
             "title": forms.TextInput(attrs={"class": "form-control"}),
             "platform": forms.TextInput(attrs={"class": "form-control"}),
-            "release_date": forms.DateInput(attrs={"class": "form-control", "type": "date"}),
             "price": forms.NumberInput(attrs={"class": "form-control"}),
             "genre": forms.Select(attrs={"class": "form-control"}),
+            "release_date": forms.DateInput(attrs={
+                "class": "form-control",
+                "type": "date"
+            }),
         }
 
 
 class GamerCreationForm(UserCreationForm):
     class Meta:
         model = Gamer
-        fields = UserCreationForm.Meta.fields + ("first_name", "last_name", "bio",)
+        fields = UserCreationForm.Meta.fields + (
+            "first_name",
+            "last_name",
+            "bio",
+        )
 
 
 class GamerBioUpdateForm(forms.ModelForm):

@@ -21,7 +21,7 @@
             <div class="card">
               <div class="card-body">
                 <h5 class="card-title">
-                  <a href="{% url 'collection:game-detail' pk=game.id %}">{{ game }}</a>
+                  <a href="{% url 'collection:game-detail' pk=game.id %}">{{ game.title }}</a>
                 </h5>
                 <p class="card-text">Genre: {{ game.genre }}</p>
               </div>

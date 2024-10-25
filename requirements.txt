@@ -1,0 +1,16 @@
+asgiref==3.8.1
+click==8.1.7
+colorama==0.4.6
+Django==5.1.2
+django-debug-toolbar==4.4.6
+django-extensions==3.2.3
+mccabe==0.7.0
+mypy-extensions==1.0.0
+packaging==24.1
+pathspec==0.12.1
+platformdirs==4.3.6
+pycodestyle==2.12.1
+pyflakes==3.2.0
+setuptools==75.2.0
+sqlparse==0.5.1
+tzdata==2024.2
