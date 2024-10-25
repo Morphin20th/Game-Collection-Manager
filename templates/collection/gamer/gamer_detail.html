@@ -34,7 +34,7 @@
                   <div class="btn-group">
                     {% if collection.gamer == request.user %}
                       <a href="{% url 'collection:collection-update' pk=collection.id %}"
-                         class="btn btn-sm btn-outline-primary">Edit</a>
+                      class="btn btn-sm btn-outline-primary">Edit</a>
                       <a href="{% url 'collection:collection-delete' pk=collection.id %}"
                          class="btn btn-sm btn-outline-danger">Delete</a>
                     {% else %}
@@ -53,6 +53,7 @@
             <div class="d-flex justify-content-between">
               {% if gamer.pk == request.user.pk %}
                 <a class="btn btn-secondary" href="{% url 'collection:gamer-update' pk=gamer.id %}">Edit Bio</a>
+                <a class="btn btn-sm btn-primary" href="{% url 'collection:collection-create' %}">Create</a>
                 <a class="btn btn-danger" href="{% url 'collection:gamer-delete' pk=gamer.id %}">Delete User</a>
               {% endif %}
             </div>
