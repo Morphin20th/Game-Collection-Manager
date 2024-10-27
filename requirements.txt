@@ -11,7 +11,7 @@ pathspec==0.12.1
 platformdirs==4.3.6
 pycodestyle==2.12.1
 pyflakes==3.2.0
+python-dotenv==1.0.1
 setuptools==75.2.0
 sqlparse==0.5.1
 tzdata==2024.2
-python-dotenv~=1.0.1
