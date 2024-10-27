@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="card text-center">
+        <div class="card-body">
+          <h5 class="card-title">You have been logged out</h5>
+          <p class="card-text">We hope to see you again soon!</p>
+          <a href="{% url 'collection:index' %}" class="btn btn-primary">Go to Home Page</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

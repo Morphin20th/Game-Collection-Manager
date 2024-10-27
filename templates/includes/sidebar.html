@@ -1,0 +1,84 @@
+<nav class="pcoded-navbar">
+  <div class="navbar-wrapper">
+    <div class="navbar-brand header-logo">
+      <a target="_blank"
+         href="{% url 'collection:index' %}" class="b-brand">
+        <div class="b-bg">
+          <i class="feather icon-package"></i>
+        </div>
+        <span class="b-title">Collection Manager</span>
+      </a>
+      <a class="mobile-menu" id="mobile-collapse" href="javascript:"><span></span></a>
+    </div>
+    <div class="navbar-content scroll-div">
+      <ul class="nav pcoded-inner-navbar">
+
+        {#   Account   #}
+        <li class="nav-item pcoded-menu-caption">
+          <label>Account</label>
+        </li>
+        <li class="nav-item">
+          {% if user.is_authenticated %}
+            <a href="{% url 'collection:gamer-detail' pk=user.id %}" class="nav-link">
+              <span class="pcoded-micon"><i class="feather icon-user"></i></span>
+              <span class="pcoded-mtext">Logged in as {{ user.username }}</span>
+            </a>
+            <form action="{% url 'logout' %}" method="post">
+              {% csrf_token %}
+              <button type="submit" class="btn nav-link text-left">
+                <span class="pcoded-micon"><i class="feather icon-power"></i></span>
+                <span class="pcoded-mtext">Log out</span>
+              </button>
+            </form>
+          {% else %}
+            <a href="{% url 'login' %}" class="nav-link">
+              <span class="pcoded-micon"><i class="feather icon-log-in"></i></span>
+              <span class="pcoded-mtext">Log in</span>
+            </a>
+          {% endif %}
+        </li>
+
+        {#   Navigation by pages     #}
+        <li class="nav-item pcoded-menu-caption">
+          <label>Pages</label>
+        </li>
+        <li class="nav-item">
+          <a href="{% url 'collection:index' %}" class="nav-link">
+            <span class="pcoded-micon"><i class="feather icon-home"></i></span>
+            <span class="pcoded-mtext">Home</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="{% url 'collection:my-collection-list' %}" class="nav-link">
+            <span class="pcoded-micon"><i class="feather icon-list"></i></span>
+            <span class="pcoded-mtext">My collections</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="{% url 'collection:collection-list' %}" class="nav-link">
+            <span class="pcoded-micon"><i class="feather icon-grid"></i></span>
+            <span class="pcoded-mtext">All collections</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="{% url 'collection:gamer-list' %}" class="nav-link">
+            <span class="pcoded-micon"><i class="feather icon-users"></i></span>
+            <span class="pcoded-mtext">All gamers</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="{% url 'collection:game-list' %}" class="nav-link">
+            <span class="pcoded-micon"><i class="feather icon-play"></i></span>
+            <span class="pcoded-mtext">All games</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="{% url 'collection:genre-list' %}" class="nav-link">
+            <span class="pcoded-micon"><i class="feather icon-tag"></i></span>
+            <span class="pcoded-mtext">All genres</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>

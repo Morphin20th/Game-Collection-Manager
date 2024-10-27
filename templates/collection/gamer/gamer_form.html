@@ -1,0 +1,92 @@
+{% extends "base.html" %}
+{% block title %}
+  <title>{{ object|yesno:"Update Bio, Create Gamer" }}</title>
+{% endblock %}
+
+{% block content %}
+  <div class="pcoded-content">
+    <div class="pcoded-inner-content">
+      <div class="main-body">
+        <div class="page-wrapper">
+          <div class="row">
+            <div class="col-sm-12">
+              <div class="card">
+                <div class="card-header">
+                  <h5>{{ object|yesno:"Update Bio, Create Gamer" }}</h5>
+                </div>
+                <div class="card-body">
+                  <form action="" method="post" novalidate>
+                    {% csrf_token %}
+
+                    <!-- Username -->
+                    {% if form.username %}
+                      <div class="form-group">
+                        <label for="username">Username</label>
+                        <input type="text" id="username" name="username" class="form-control"
+                               value="{{ form.username.value|default_if_none:'' }}" required>
+                      </div>
+                    {% endif %}
+
+                    <!-- E-Mail -->
+                    {% if form.email %}
+                      <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="text" id="email" name="email" class="form-control"
+                               value="{{ form.email.value|default_if_none:'' }}">
+                      </div>
+                    {% endif %}
+
+                    <!-- Password1 -->
+                    {% if form.password1 %}
+                      <div class="form-group">
+                        <label for="password1">Password</label>
+                        <input type="password" id="password1" name="password1" class="form-control" required>
+                      </div>
+                    {% endif %}
+
+                    <!-- Password2 (Confirmation) -->
+                    {% if form.password2 %}
+                      <div class="form-group">
+                        <label for="password2">Confirm Password</label>
+                        <input type="password" id="password2" name="password2" class="form-control" required>
+                      </div>
+                    {% endif %}
+
+                    <!-- First Name -->
+                    {% if form.first_name %}
+                      <div class="form-group">
+                        <label for="first_name">First Name</label>
+                        <input type="text" id="first_name" name="first_name" class="form-control"
+                               value="{{ form.first_name.value|default_if_none:'' }}">
+                      </div>
+                    {% endif %}
+
+                    <!-- Last Name -->
+                    {% if form.last_name %}
+                      <div class="form-group">
+                        <label for="last_name">Last Name</label>
+                        <input type="text" id="last_name" name="last_name" class="form-control"
+                               value="{{ form.last_name.value|default_if_none:'' }}">
+                      </div>
+                    {% endif %}
+
+
+
+                    <!-- Bio -->
+                    <div class="form-group">
+                      <label for="bio">Bio</label>
+                      <textarea id="bio" name="bio" class="form-control"
+                                rows="3">{{ form.bio.value|default_if_none:'' }}</textarea>
+                    </div>
+
+                    <input class="btn btn-primary" type="submit" value="Submit">
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

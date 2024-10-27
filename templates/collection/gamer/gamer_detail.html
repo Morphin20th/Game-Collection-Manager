@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+
+{% block title %}
+  <title>{{ gamer.username }} Profile</title>
+{% endblock %}
+
+{% block content %}
+  <div class="container mt-5">
+    <div class="row justify-content-center">
+      <div class="col-md-8">
+        <div class="card">
+          <div class="card-header text-center">
+            <h2>{{ gamer.username }}'s Profile</h2>
+          </div>
+          <div class="card-body">
+            <!-- Bio -->
+            {% if gamer.bio %}
+              <p><strong>Bio:</strong> {{ gamer.bio }}</p>
+            {% endif %}
+
+            <!-- First and Last Name -->
+            {% if gamer.first_name and gamer.last_name %}
+              <p><strong>First Name:</strong> {{ gamer.first_name }}</p>
+              <p><strong>Last Name:</strong> {{ gamer.last_name }}</p>
+            {% endif %}
+
+            <!-- Collections -->
+            <h3 class="mt-4">{{ gamer.username }}'s Collections:</h3>
+            <ul class="list-group mb-3">
+              {% for collection in gamer.collections.all %}
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                  <a href="{{ collection.get_absolute_url }}" class="fw-bold text-decoration-none">{{ collection.name }}</a>
+
+                  <div class="btn-group">
+                    {% if collection.gamer == request.user %}
+                      <a href="{% url 'collection:collection-update' pk=collection.id %}"
+                      class="btn btn-sm btn-outline-primary">Edit</a>
+                      <a href="{% url 'collection:collection-delete' pk=collection.id %}"
+                         class="btn btn-sm btn-outline-danger">Delete</a>
+                    {% else %}
+                      <a href="{% url 'collection:collection-copy' pk=collection.id %}"
+                         class="btn btn-sm btn-outline-secondary">Copy</a>
+                    {% endif %}
+                  </div>
+                </li>
+              {% empty %}
+                <p>{{ gamer.username }} has no collections yet.</p>
+              {% endfor %}
+            </ul>
+
+
+            <!-- Action Buttons -->
+            <div class="d-flex justify-content-between">
+              {% if gamer.pk == request.user.pk %}
+                <a class="btn btn-secondary" href="{% url 'collection:gamer-update' pk=gamer.id %}">Edit Bio</a>
+                <a class="btn btn-sm btn-primary" href="{% url 'collection:collection-create' %}">Create</a>
+                <a class="btn btn-danger" href="{% url 'collection:gamer-delete' pk=gamer.id %}">Delete User</a>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
