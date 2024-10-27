@@ -28,12 +28,13 @@
     </div>
   </div>
 
-  {% if collections %}
-    <div class="card Recent-Users">
-      <div class="card-header">
-        <h5>Collections List</h5>
-        <a href="{% url 'collection:collection-create' %}" class="btn btn-success mt-3">Add new collection</a>
-      </div>
+
+  <div class="card Recent-Users">
+    <div class="card-header">
+      <h5>Collections List</h5>
+      <a href="{% url 'collection:collection-create' %}" class="btn btn-success mt-3">Add new collection</a>
+    </div>
+    {% if collections %}
       <div class="card-block px-0 py-3">
         <div class="table-responsive">
           <table class="table table-hover">
@@ -74,8 +75,9 @@
           </table>
         </div>
       </div>
-    </div>
-  {% else %}
-    <p>No collections available.</p>
-  {% endif %}
+    {% else %}
+      <p>No collections available.</p>
+    {% endif %}
+  </div>
+
 {% endblock %}
