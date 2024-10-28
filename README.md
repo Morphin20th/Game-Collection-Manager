@@ -25,4 +25,4 @@ python manage.py runserver
 
 ## Demo
 
-![Website Interface](demo.png)
+![Website Interface](static/assets/images/demo.png)
