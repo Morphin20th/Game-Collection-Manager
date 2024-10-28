@@ -29,17 +29,15 @@
 
 <div class="container-fluid">
   <div class="row">
-    <div class="">
+    <div class="col-md-3 pcoded-navbar">
       {% block sidebar %}
         {% include "includes/sidebar.html" %}
       {% endblock %}
     </div>
-
-    <div class="col-sm-9 pcoded-main-container">
+    <div class="col-md-9 pcoded-main-container">
       <div class="pcoded-wrapper">
         {% block content %}
         {% endblock %}
-
         {% block pagination %}
           {% include "includes/pagination.html" %}
         {% endblock %}
@@ -47,6 +45,7 @@
     </div>
   </div>
 </div>
+
 
 {% include 'includes/scripts.html' %}
 
